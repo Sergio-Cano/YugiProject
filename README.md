@@ -66,4 +66,23 @@ Aquí podremos ver en detalle las cartas del deck en el que hemos clickado antes
 En Yu-Gi-Oh! se pueden utilizar un máximo de tres copias de la misma carta por mazo. En esta página podremos consultar la lista actualizada con las cartas prohibidas, limitadas (máximo 1 copia) y semilimitadas (máximo 2 copias).
 
 
+- MODELO DE BASE DE DATOS
+
+La base de datos tendrá tres tablas:
+
+    - Users: constará de id (uuid), username, email (único) y password (de mínimo 4 caracteres)
+    - Decks: esta tabla contendrá el nombre del deck (deck_name), las cartas del deck principal (main_deck), las cartas del deck extra (extra_deck) y por último el id de usuario (como foreign key). Los campos main_deck y extra_deck guardarán arrays con los nombres de las cartas.
+    - Favorites: constará de un array con las cartas elegidas por el usuario y el id de usuario.
+
+A la hora de crear los decks seguiré las limitaciones marcadas por las normas del juego, que serían las siguientes:
+
+    - El deck principal debe contener entre 40 y 60 cartas.
+    - El deck extra puede contener de 0 a 15 cartas.
+    - El máximo de copias de una misma carta será de 3.
+    - En caso de que una carta esté en la banlist limitaré el número de copias en el deck o deck extra a las que indique la banlist (si la carta está prohibida no dejaré que se incluya en el deck).
+
+
+
+
+
 
