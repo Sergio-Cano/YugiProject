@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS decks;
 DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS users;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -13,15 +13,15 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE if NOT EXISTS decks (
     deck_name TEXT NOT NULL,
-    main_deck TEXT[] NOT NULL,
-    extra_deck TEXT[],
+    main_deck_cards TEXT NOT NULL,
+    extra_deck_cards TEXT,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
 CREATE TABLE if NOT EXISTS favorites (
-    cards TEXT[] NOT NULL,
+    cards TEXT NOT NULL,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE

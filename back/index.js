@@ -1,10 +1,14 @@
+require("dotenv").config();
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const db = require("./configs/db");
 const errors = require("./misc/errors");
 const routes = require("./routes");
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(routes(db));
 
 app.use((_, __, next) => {
@@ -18,4 +22,4 @@ app.use(({ statusCode, error }, _, res, __) => {
     })
 })
 
-app.listen(process.env.PORT, () => console.log("> Listening at: ", process.env.PORT));
+app.listen(process.env.PORT, () => console.log("> Listening at:", process.env.PORT));
