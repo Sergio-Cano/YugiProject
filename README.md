@@ -71,7 +71,7 @@ En Yu-Gi-Oh! se pueden utilizar un máximo de tres copias de la misma carta por 
 La base de datos tendrá tres tablas:
 
     - Users: constará de id (uuid), username, email (único) y password (de mínimo 4 caracteres)
-    - Decks: esta tabla contendrá el nombre del deck (deck_name), las cartas del deck principal (main_deck_cards), las cartas del deck extra (extra_deck_cards) y por último el id de usuario (como foreign key). 
+    - Decks: esta tabla contendrá el nombre del deck (deck_name), las cartas del deck (card) y por último el id de usuario (como foreign key).
     - Favorites: constará de las cartas elegidas por el usuario y el id de usuario.
 
 A la hora de crear los decks seguiré las limitaciones marcadas por las normas del juego, que serían las siguientes:
