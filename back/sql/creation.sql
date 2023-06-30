@@ -13,14 +13,28 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE if NOT EXISTS decks (
     deck_name TEXT NOT NULL,
-    card TEXT NOT NULL,
+    card_name TEXT NOT NULL,
+    card_type TEXT NOT NULL,
+    type TEXT NOT NULL,
+    attribute TEXT,
+    card_description TEXT NOT NULL,
+    attack INTEGER,
+    defense INTEGER,
+    level_rank_link INTEGER,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
 CREATE TABLE if NOT EXISTS favorites (
-    card TEXT NOT NULL,
+    card_name TEXT NOT NULL,
+    card_type TEXT NOT NULL,
+    type TEXT NOT NULL,
+    attribute TEXT,
+    card_description TEXT NOT NULL,
+    attack INTEGER,
+    defense INTEGER,
+    level_rank_link INTEGER,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE

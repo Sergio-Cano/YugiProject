@@ -26,5 +26,17 @@ module.exports = {
     500: {
         statusCode: 500,
         error: new Error('something went wrong!'),
+    },
+    short_deck: {
+        statusCode: 406,
+        error: new Error('Main Deck must be at least 40 cards'),
+    },
+    long_main_deck: {
+        statusCode: 406,
+        error: new Error('Main Deck must be at most 60 cards'),
+    },
+    long_extra_deck: {
+        statusCode: 406,
+        error: new Error('Extra Deck must be at most 15 cards'),
     }
 }
