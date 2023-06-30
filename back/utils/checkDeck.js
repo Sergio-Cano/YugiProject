@@ -1,6 +1,20 @@
+const cardCount = require("./cardCount");
 const errors = require("../misc/errors");
 
 module.exports = (deckList, next) => {
+    for(let card of deckList) {
+        const { cardName } = card;
+        const count = cardCount(cardName, deckList);
+
+        if(count > 3) return {
+            success: false,
+            next: next({
+                statusCode: 406,
+                error: new Error(`You can't use more of 3 copies of ${cardName}`),
+            })
+        }
+    }
+
     const extraDeckTypes = ["fusion","synchro","xyz","link"];
 
     let mainDeck = 0;

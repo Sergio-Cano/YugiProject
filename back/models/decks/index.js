@@ -1,9 +1,9 @@
-const { insertCard, removeDeck } = require("./queries")
+const { insertCard, removeDeck, getDeckByName, getUserDecks } = require("./queries")
 
 const createDeck = (db) => async (decklist, email) => {
     try {
         for(let card of decklist) {
-            const { deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink } = card;
+            const { deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null } = card;
 
             await db.query(insertCard(deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, email));
         }
@@ -46,4 +46,5 @@ module.exports = (db) = {
     createDeck,
     deleteDeck,
     updateDeck,
+    
 }

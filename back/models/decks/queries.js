@@ -1,6 +1,6 @@
 const { sql } = require("slonik");
 
-const insertCard = (deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, email) => sql.unsafe`
+const insertCard = (deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, email) => sql.unsafe`
     INSERT INTO decks (
         deck_name, card_name, card_type, type, attribute, card_description, attack, defense, level_rank_link, created_by
     ) VALUES (
@@ -10,10 +10,23 @@ const insertCard = (deckName, cardName, cardType, type, attribute, cardDescripti
 
 const removeDeck = (deckName, email) => sql.unsafe`
     DELETE FROM decks
-    WHERE deck_name LIKE ${deckName} AND created_by = (SELECT id FROM users WHERE email = ${email})
+    WHERE deck_name LIKE ${deckName} AND created_by = (SELECT id FROM users WHERE email LIKE ${email})
+`
+
+const getDeckByName = (deckName) => sql.unsafe`
+    SELECT * FROM decks
+    WHERE deck_name LIKE ${deckName}
+`
+
+const getUserDecks = (email) => sql.unsafe`
+    SELECT * FROM decks
+    WHERE created_by = (SELECT id FROM users WHERE email LIKE ${email})
 `
 
 module.exports = {
     insertCard,
-    removeDeck
+    removeDeck,
+    getDeckByName,
+    getUserDecks
+
 }
