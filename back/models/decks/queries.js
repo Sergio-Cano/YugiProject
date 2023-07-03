@@ -13,20 +13,25 @@ const removeDeck = (deckName, email) => sql.unsafe`
     WHERE deck_name LIKE ${deckName} AND created_by = (SELECT id FROM users WHERE email LIKE ${email})
 `
 
-const getDeckByName = (deckName) => sql.unsafe`
+const searchDeckByName = (deckName) => sql.unsafe`
     SELECT * FROM decks
-    WHERE deck_name LIKE ${deckName}
+    WHERE LOWER(deck_name) LIKE ${deckName}
 `
 
-const getUserDecks = (email) => sql.unsafe`
+const searchUserDecks = (email) => sql.unsafe`
     SELECT * FROM decks
     WHERE created_by = (SELECT id FROM users WHERE email LIKE ${email})
+`
+
+const searchAllDecks = () => sql.unsafe`
+    SELECT * FROM decks
+    ORDER BY deck_name
 `
 
 module.exports = {
     insertCard,
     removeDeck,
-    getDeckByName,
-    getUserDecks
-
+    searchDeckByName,
+    searchUserDecks,
+    searchAllDecks
 }

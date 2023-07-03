@@ -1,4 +1,4 @@
-const { insertCard, removeDeck, getDeckByName, getUserDecks } = require("./queries")
+const { insertCard, removeDeck, searchDeckByName, searchUserDecks, searchAllDecks } = require("./queries")
 
 const createDeck = (db) => async (decklist, email) => {
     try {
@@ -42,9 +42,55 @@ const updateDeck = (db) => async (originalDeckName, decklist, email) => {
     }
 }
 
+const getDeckByName = (db) => async (deckName = "") => {
+    try {
+        const parsedDeckName = "%" + deckName.toLowerCase() + "%";
+
+        const data = await db.query(searchDeckByName(parsedDeckName));
+
+        return {
+            ok: true,
+            content: data.rows
+        }
+    } catch (error) {
+        console.log(error.message);
+        return { ok: false }
+    }
+}
+
+const getUserDecks = (db) => async (email) => {
+    try {
+        const data = await db.query(searchUserDecks(email));
+
+        return {
+            ok: true,
+            content: data.rows
+        }
+    } catch (error) {
+        console.log(error.message);
+        return { ok: false }
+    }
+}
+
+const getAllDecks = (db) => async () => {
+    try {
+        const data = await db.query(searchAllDecks());
+
+        return {
+            ok: true,
+            content: data.rows
+        }
+    } catch (error) {
+        console.log(error.message);
+        return { ok: false }
+    }
+}
+
 module.exports = (db) = {
     createDeck,
     deleteDeck,
     updateDeck,
-    
+    getDeckByName,
+    getUserDecks,
+    getAllDecks
 }
