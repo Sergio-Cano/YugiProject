@@ -21,6 +21,9 @@ CREATE TABLE if NOT EXISTS decks (
     attack INTEGER,
     defense INTEGER,
     level_rank_link INTEGER,
+    img_url TEXT NOT NULL,
+    img_url_small TEXT NOT NULL,
+    img_url_cropped TEXT NOT NULL,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -35,6 +38,9 @@ CREATE TABLE if NOT EXISTS favorites (
     attack INTEGER,
     defense INTEGER,
     level_rank_link INTEGER,
+    img_url TEXT NOT NULL,
+    img_url_small TEXT NOT NULL,
+    img_url_cropped TEXT NOT NULL,
     created_by uuid REFERENCES users
         ON UPDATE CASCADE
         ON DELETE CASCADE

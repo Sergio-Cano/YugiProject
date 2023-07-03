@@ -1,10 +1,10 @@
 const { sql } = require("slonik");
 
-const insertCard = (deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, email) => sql.unsafe`
+const insertCard = (deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, imgUrl, imgUrlSmall, imgUrlCrop, email) => sql.unsafe`
     INSERT INTO decks (
-        deck_name, card_name, card_type, type, attribute, card_description, attack, defense, level_rank_link, created_by
+        deck_name, card_name, card_type, type, attribute, card_description, attack, defense, level_rank_link, img_url, img_url_small, img_url_cropped, created_by
     ) VALUES (
-        ${deckName}, ${cardName}, ${cardType}, ${type}, ${attribute}, ${cardDescription}, ${attack}, ${defense}, ${levelRankLink}, (SELECT id FROM users WHERE email LIKE ${email})
+        ${deckName}, ${cardName}, ${cardType}, ${type}, ${attribute}, ${cardDescription}, ${attack}, ${defense}, ${levelRankLink}, ${imgUrl}, ${imgUrlSmall}, ${imgUrlCrop}, (SELECT id FROM users WHERE email LIKE ${email})
     )
 `
 

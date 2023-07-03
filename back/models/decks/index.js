@@ -3,9 +3,9 @@ const { insertCard, removeDeck, searchDeckByName, searchUserDecks, searchAllDeck
 const createDeck = (db) => async (decklist, email) => {
     try {
         for(let card of decklist) {
-            const { deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null } = card;
+            const { deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, imgUrl, imgUrlSmall, imgUrlCrop } = card;
 
-            await db.query(insertCard(deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, email));
+            await db.query(insertCard(deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, imgUrl, imgUrlSmall, imgUrlCrop, email));
         }
 
         return { ok: true };
