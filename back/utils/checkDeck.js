@@ -1,5 +1,6 @@
 const cardCount = require("./cardCount");
 const errors = require("../misc/errors");
+const { EXTRA_DECK } = require("../constants");
 
 module.exports = (deckList, next) => {
     for(let card of deckList) {
@@ -15,14 +16,12 @@ module.exports = (deckList, next) => {
         }
     }
 
-    const extraDeckTypes = ["fusion","synchro","xyz","link"];
-
     let mainDeck = 0;
     let extraDeck = 0;
 
     for(let card of deckList) {
         const { cardType } = card;
-        extraDeckTypes.includes(cardType) ? extraDeck += 1 : mainDeck += 1;
+        EXTRA_DECK.includes(cardType) ? extraDeck += 1 : mainDeck += 1;
     }
 
     if(extraDeck > 15) return {

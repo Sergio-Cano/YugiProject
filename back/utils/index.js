@@ -1,4 +1,5 @@
 module.exports = {
     checkDeck: require("./checkDeck"),
-    checkBanlist: require("./checkBanlist")
+    checkBanlist: require("./checkBanlist"),
+    getBanlist: require("./getBanlist")
 }

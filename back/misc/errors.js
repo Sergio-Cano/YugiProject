@@ -38,5 +38,9 @@ module.exports = {
     long_extra_deck: {
         statusCode: 406,
         error: new Error('Extra Deck must be at most 15 cards'),
+    },
+    card_not_found: {
+        statusCode: 404,
+        error: new Error('No card matching your query was found')
     }
 }

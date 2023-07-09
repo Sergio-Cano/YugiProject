@@ -4,9 +4,9 @@ const { authorizer } = require("../middlewares");
 const deckCtrl = require("../controllers/decks");
 
 module.exports = (db) => {
-    router.post("/create", authorizer, deckCtrl.createDeck(db));
-    router.delete("/delete", authorizer, deckCtrl.deleteDeck(db));
-    router.put("/update", authorizer, deckCtrl.updateDeck(db));
+    router.post("/", authorizer, deckCtrl.createDeck(db));
+    router.delete("/", authorizer, deckCtrl.deleteDeck(db));
+    router.put("/", authorizer, deckCtrl.updateDeck(db));
     router.get("/", deckCtrl.getAllDecks(db));
     router.get("/name/:name", deckCtrl.getDeckByName(db));
     router.get("/user", authorizer, deckCtrl.getUserDecks(db));

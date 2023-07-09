@@ -1,8 +1,9 @@
-const banlist = require("../data/banlist");
 const cardCount = require("./cardCount");
 
+const getBanlist = require("./getBanlist")
 
-module.exports = (decklist, next) => {
+module.exports = async (decklist, next) => {
+    const banlist = await getBanlist();
 
     for(let card of decklist) {
         const count = cardCount(card.cardName, decklist);
@@ -10,7 +11,7 @@ module.exports = (decklist, next) => {
         const cardOnBanlist = banlist.find((cardOnBan) => cardOnBan.name === card.cardName) || null;
 
         if(cardOnBanlist){
-            const { name, banlist_info: { ban_tcg: status}  } = cardOnBanlist;
+            const { name, status } = cardOnBanlist;
     
             if(status === "Banned") return {
                 success: false,

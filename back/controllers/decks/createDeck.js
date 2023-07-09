@@ -6,10 +6,10 @@ module.exports = (db) => async (req, res, next) => {
     const decklist = req.body;
     const { email } = res.locals;
 
-    const banlistCheck = checkBanlist(decklist, next);
+    const banlistCheck = await checkBanlist(decklist, next);
 
     if(!banlistCheck.success) return banlistCheck.next;
-
+    
     const deckCheck = checkDeck(decklist, next);
 
     if(!deckCheck.success) return deckCheck.next;

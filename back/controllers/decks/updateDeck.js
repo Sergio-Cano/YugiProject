@@ -1,15 +1,18 @@
 const errors = require("../../misc/errors");
-const checkDeck = require("../../utils/checkDeck");
+const { checkBanlist, checkDeck } = require("../../utils");
 const { updateDeck } = require("../../models/decks");
-
 
 module.exports = (db) => async (req, res, next) => {
     const { originalDeckName, deckList } = req.body;
     const { email } = res.locals;
 
-    const check = checkDeck(deckList, next);
+    const banlistCheck = await checkBanlist(deckList, next);
 
-    if(!check.success) return check;
+    if(!banlistCheck.success) return banlistCheck.next;
+
+    const deckCheck = checkDeck(deckList, next);
+
+    if(!deckCheck.success) return deckCheck.next;
 
     const response = await updateDeck(await db)(originalDeckName, deckList, email);
 
