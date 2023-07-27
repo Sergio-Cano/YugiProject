@@ -42,5 +42,9 @@ module.exports = {
     card_not_found: {
         statusCode: 404,
         error: new Error('No card matching your query was found')
+    },
+    empty_search: {
+        statusCode: 400,
+        error: new Error('You must use at least one filter for your search')
     }
 }

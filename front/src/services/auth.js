@@ -29,3 +29,13 @@ export const logout = (client) => async () => {
         return { success: false }
     }
 }
+
+export const getUser = (client) => async () => {
+    try {
+        const { data } = await client.get(`${PATH}/user`);
+        return data;
+    } catch (error) {
+        console.log("GetUser error:", error.message);
+        return { success: false }
+    }
+}

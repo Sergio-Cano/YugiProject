@@ -3,9 +3,9 @@ const { insertCard, removeDeck, searchDeckByName, searchUserDecks, searchAllDeck
 const createDeck = (db) => async (decklist, email) => {
     try {
         for(let card of decklist) {
-            const { deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, imgUrl, imgUrlSmall, imgUrlCrop } = card;
+            const { deckName, cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRank = null, linkRating = null, scale = null, imgUrl, imgUrlSmall, imgUrlCrop, cardId } = card;
 
-            await db.query(insertCard(deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, imgUrl, imgUrlSmall, imgUrlCrop, email));
+            await db.query(insertCard(deckName, cardName, cardType, type, attribute, cardDescription, attack, defense, levelRank, linkRating, scale, imgUrl, imgUrlSmall, imgUrlCrop, cardId, email));
         }
 
         return { ok: true };
@@ -42,7 +42,7 @@ const updateDeck = (db) => async (originalDeckName, decklist, email) => {
     }
 }
 
-const getDeckByName = (db) => async (deckName = "") => {
+const getDeckByName = (db) => async (deckName) => {
     try {
         const parsedDeckName = "%" + deckName.toLowerCase() + "%";
 

@@ -3,9 +3,9 @@ const { insertCard, getList, removeList } = require("./queries");
 const createFavoriteList = (db) => async (cardList, email) => {
     try {
         for(let card of cardList) {
-            const { cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, imgUrl, imgUrlSmall, imgUrlCrop } = card;
+            const { cardName, cardType, type, attribute = null, cardDescription, attack = null, defense = null, levelRankLink = null, scale = null, imgUrl, imgUrlSmall, imgUrlCrop } = card;
     
-            await db.query(insertCard(cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, imgUrl, imgUrlSmall, imgUrlCrop, email));
+            await db.query(insertCard(cardName, cardType, type, attribute, cardDescription, attack, defense, levelRankLink, scale, imgUrl, imgUrlSmall, imgUrlCrop, email));
         }
 
         return { ok: true }        

@@ -10,6 +10,7 @@ module.exports = (db) => {
     router.post("/signup", signupValidator, authCtrl.signup(db));
     router.post("/signin", signinValidator, authCtrl.signin(db));
     router.post("/signout", authorizer, authCtrl.signout());
+    router.get("/user", authorizer, authCtrl.getUser());
 
     return router;
 }

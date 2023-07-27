@@ -2,9 +2,7 @@ const { getDeckByName } = require("../../models/decks");
 const errors = require("../../misc/errors");
 
 module.exports = (db) => async (req, res, next) => {
-    const deckName = req.params.name;
-
-    console.log("Search: ", deckName);
+    const { deckName } = req.query;
 
     const response = await getDeckByName(await db)(deckName);
 

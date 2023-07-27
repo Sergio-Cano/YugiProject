@@ -10,7 +10,7 @@ module.exports = (db) => {
     router.use("/auth", authRoutes(db));
     router.use("/deck", deckRoutes(db));
     router.use("/favorites", favoritesRoutes(db));
-    router.use("/card", cardRoutes());
+    router.use("/card", cardRoutes(db));
     
     return router;
 }

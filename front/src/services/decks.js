@@ -1,8 +1,8 @@
-const PATH = "/decks";
+const PATH = "/deck";
 
 export const getAllDecks = (client) => async () => {
     try {
-        const { data } = await client.get(`${PATH}/`);
+        const { data } = await client.get(PATH);
         return data;
     } catch (error) {
         console.log("GetAll error:", error.message);
@@ -10,9 +10,13 @@ export const getAllDecks = (client) => async () => {
     }
 }
 
-export const getDeckByName = (client) => async (name) => {
+export const getDeckByName = (client) => async (params) => {    
     try {
-        const { data } = await client.get(`${PATH}/name/${name}`);
+        const deckName = params.queryKey[1];
+
+        const { data } = await client.get(`${PATH}/name`, {
+            params: {...deckName}
+        });
         return data;
     } catch (error) {
         console.log("GetByName error:", error.message);
@@ -20,9 +24,9 @@ export const getDeckByName = (client) => async (name) => {
     }
 }
 
-export const getDeckByUser = (client) => async (params) => {
+export const getDeckByUser = (client) => async () => {
     try {
-        const { data } = await client.get(`${PATH}/user`, params);
+        const { data } = await client.get(`${PATH}/user`);
         return data;
     } catch (error) {
         console.log("GetByUser error:", error.message);
@@ -32,7 +36,7 @@ export const getDeckByUser = (client) => async (params) => {
 
 export const createDeck = (client) => async (params) => {
     try {
-        const { data } = await client.post(`${PATH}/create`, params);
+        const { data } = await client.post(PATH, params);
         return data;
     } catch (error) {
         console.log("CreateDeck error:", error.message);
@@ -42,7 +46,7 @@ export const createDeck = (client) => async (params) => {
 
 export const deleteDeck = (client) => async (params) => {
     try {
-        const { data } = await client.delete(`${PATH}/delete`, params);
+        const { data } = await client.delete(PATH, params);
         return data;
     } catch (error) {
         console.log("DeleteDeck error:", error.message);
@@ -52,11 +56,10 @@ export const deleteDeck = (client) => async (params) => {
 
 export const updateDeck = (client) => async (params) => {
     try {
-        const { data } = await client.put(`${PATH}/update`, params);
+        const { data } = await client.put(PATH, params);
         return data;
     } catch (error) {
         console.log("DeleteDeck error:", error.message);
         return { success: false };
     }
 }
-

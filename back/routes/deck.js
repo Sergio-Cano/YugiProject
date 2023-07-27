@@ -8,8 +8,8 @@ module.exports = (db) => {
     router.delete("/", authorizer, deckCtrl.deleteDeck(db));
     router.put("/", authorizer, deckCtrl.updateDeck(db));
     router.get("/", deckCtrl.getAllDecks(db));
-    router.get("/name/:name", deckCtrl.getDeckByName(db));
     router.get("/user", authorizer, deckCtrl.getUserDecks(db));
+    router.get("/name/", deckCtrl.getDeckByName(db));
 
     return router;
 }

@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+const { getApiImages } = require("../services")
 
 const parseBanlist = (banlist) => {
 
@@ -6,10 +7,11 @@ const parseBanlist = (banlist) => {
 
     for(let card of banlist) {
         const banCard = {
+            id: card.id,
             name: card.name,
             status: card.banlist_info.ban_tcg
         }
-
+        
         banArray.push(banCard)
     }
     
@@ -18,7 +20,7 @@ const parseBanlist = (banlist) => {
 
 module.exports = async () => {
     const banlist = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?banlist=tcg").then(res => res.data.data);
-    
+
     const parsed = parseBanlist(banlist);
 
     return parsed;

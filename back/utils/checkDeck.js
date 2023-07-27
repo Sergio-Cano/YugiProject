@@ -1,6 +1,5 @@
 const cardCount = require("./cardCount");
 const errors = require("../misc/errors");
-const { EXTRA_DECK } = require("../constants");
 
 module.exports = (deckList, next) => {
     for(let card of deckList) {
@@ -18,6 +17,8 @@ module.exports = (deckList, next) => {
 
     let mainDeck = 0;
     let extraDeck = 0;
+
+    const EXTRA_DECK = ['Fusion Monster', 'Pendulum Effect Fusion Monster', 'Synchro Monster', 'Synchro Tuner Monster', 'Synchro Pendulum Effect Monster', 'XYZ Monster', 'XYZ Pendulum Effect Monster', 'Link Monster']
 
     for(let card of deckList) {
         const { cardType } = card;

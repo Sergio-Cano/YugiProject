@@ -1,8 +1,8 @@
 const PATH = "/favorites";
 
-export const getFavorites = (client) => async (params) => {
+export const getFavorites = (client) => async () => {
     try {
-        const { data } = client.get(PATH, params);
+        const { data } = await client.get(PATH);
         return data;
     } catch (error) {
         console.log("GetFavorites error:", error.message);
@@ -12,7 +12,7 @@ export const getFavorites = (client) => async (params) => {
 
 export const setFavorites = (client) => async (params) => {
     try {
-        const { data } = client.post(PATH, params);
+        const { data } = await client.post(PATH, params);
         return data;
     } catch (error) {
         console.log("GetFavorites error:", error.message);
@@ -30,9 +30,9 @@ export const updateFavorites = (client) => async (params) => {
     }    
 }
 
-export const deleteFavorites = (client) => async (params) => {
+export const deleteFavorites = (client) => async () => {
     try {
-        const { data } = client.delete(PATH, params);
+        const { data } = client.delete(PATH);
         return data;
     } catch (error) {
         console.log("GetFavorites error:", error.message);
