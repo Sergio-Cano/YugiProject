@@ -10,7 +10,7 @@ node_modules
 dist
 dist-ssr
 *.local
-src/images
+images
 
 # Editor directories and files
 .vscode/*
